@@ -11,6 +11,8 @@
 |
 */
 
+use App\Http\Controllers\CustomerController;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -18,3 +20,5 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/customers', 'CustomerController@index')->name('customers');
+Route::get('/customer/{customer}', 'CustomerController@show')->name('customer.detail');
