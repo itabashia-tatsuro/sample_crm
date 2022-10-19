@@ -13,5 +13,6 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(CustomersTableSeeder::class); // 追記
+        $this->call(ItemsTableSeeder::class); // 追記
     }
 }

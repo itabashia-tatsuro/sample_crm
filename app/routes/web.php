@@ -18,3 +18,5 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/customers', 'CustomerController@index')->name('customers');
 Route::get('/customer/{customer}', 'CustomerController@show')->name('customer.detail');
+
+Route::resource('items', 'ItemController');
