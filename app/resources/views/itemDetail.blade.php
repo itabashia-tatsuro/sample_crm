@@ -3,6 +3,11 @@
 @section('content')
 <div class="container mx-auto">
 
+  <div class="d-grid gap-2 d-md-block mb-5">
+    <a class="btn btn-success" href="{{route('items.edit', ['item' => $item])}}" role="button">編集</a>
+    <a class="btn btn-outline-dark" href="{{route('items.index')}}" role="button">戻る</a>
+  </div>
+
   <table class="table table-hover">
     <tbody>
       <tr>

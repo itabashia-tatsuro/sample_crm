@@ -70,9 +70,12 @@ class ItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($itemId)
     {
-        //
+        $item = Item::getItem($itemId);
+        return view('editItem', [
+            'item' => $item
+        ]);
     }
 
     /**
@@ -84,7 +87,15 @@ class ItemController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:50',
+            'price' => 'required|integer|between:500,10000',
+            'memo' => 'nullable',
+            'is_selling' => 'required',
+        ]);
+
+        Item::updateItem($request->all(), $id);
+        return redirect()->action('ItemController@index')->with('status', '商品の編集が完了しました');
     }
 
     /**
@@ -93,8 +104,8 @@ class ItemController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($itemId)
     {
-        //
+
     }
 }

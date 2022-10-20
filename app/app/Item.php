@@ -4,14 +4,19 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Item extends Model
 {
+    use SoftDeletes;
+    
+    protected $dates = ['deleted_at'];
+
     protected $fillable = [ 
         'name', 
         'memo', 
         'price', 
-        'is_selling' 
+        'is_selling',
     ];
 
     public static function getAllItems()
@@ -41,6 +46,21 @@ class Item extends Model
                 'price' => $data['price'],
                 'memo' => $data['memo'],
             ]);
+        } catch (\Exception $e) {
+            report($e);
+        }
+    }
+
+    public static function updateItem($data, $id)
+    {
+        try {
+            Item::where('id', $id)
+                ->update([
+                    'name' => $data['name'],
+                    'price' => $data['price'],
+                    'memo' => $data['memo'],
+                    'is_selling' => $data['is_selling'],
+                ]);
         } catch (\Exception $e) {
             report($e);
         }
