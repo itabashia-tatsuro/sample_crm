@@ -28,7 +28,7 @@ class ItemController extends Controller
      */
     public function create()
     {
-        //
+        return view('createItem');
     }
 
     /**
@@ -39,7 +39,15 @@ class ItemController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:50',
+            'price' => 'required|integer|between:500,10000',
+            'memo' => 'nullable'
+        ]);
+
+        Item::createNewItem($request->all());
+
+        return redirect()->action('ItemController@index')->with('status', '新商品の登録が完了しました');
     }
 
     /**

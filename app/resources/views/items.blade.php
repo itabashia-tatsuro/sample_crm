@@ -1,7 +1,17 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container mx-auto">
+  @if (session('status'))
+    <div class="alert alert-success">
+      {{ session('status') }}
+    </div>
+  @endif
+  
+  <div class="d-grid gap-2 d-md-block mb-5">
+    <a class="btn btn-primary" href="{{route('items.create')}}" role="button">商品登録</a>
+  </div>
 
   <table class="table table-hover">
     <thead>

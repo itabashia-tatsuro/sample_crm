@@ -27,8 +27,22 @@ class Item extends Model
         return $allItems;
     }
 
-    public static function getItem($id) {
+    public static function getItem($id)
+    {
         $item = Item::find($id);
         return $item;
+    }
+
+    public static function createNewItem($data)
+    {
+        try {
+            Item::create([
+                'name' => $data['name'],
+                'price' => $data['price'],
+                'memo' => $data['memo'],
+            ]);
+        } catch (\Exception $e) {
+            report($e);
+        }
     }
 }
