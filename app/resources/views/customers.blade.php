@@ -6,10 +6,6 @@
     <div class="alert alert-success">
       検索にヒットしませんでした。もう一度検索してください
     </div>
-  @else
-    <div class="alert alert-success">
-      条件にヒットしました。
-    </div>
   @endif
   
   <form class="row g-3" action="{{ route('search.customers') }}" method="post">

@@ -21,3 +21,4 @@ Route::post('/customers/search', 'CustomerController@index')->name('search.custo
 Route::get('/customer/{customer}', 'CustomerController@show')->name('customer.detail');
 
 Route::resource('items', 'ItemController');
+Route::post('/items/search', 'ItemController@index')->name('search.items');

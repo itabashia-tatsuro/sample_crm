@@ -19,6 +19,32 @@ class Item extends Model
         'is_selling',
     ];
 
+    /**
+     * 商品を検索するクエリスコープ
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+    */
+    public function scopeSearchItems($query, $input)
+    {
+        // $input = 検索フォームに入力された値
+        if (!empty($input)) {
+            unset($input['_token']);
+
+            // 商品名
+            if (!empty($input['name'])){
+                $query->where('name', 'like', '%'.$input['name'].'%');
+            }
+
+            // 販売状態
+            if (!empty($input['is_selling'])){
+                $query->where('is_selling', 'like', $input['is_selling']);
+            }
+            
+            return $query;
+        }
+    }
+
     public static function getAllItems()
     {
         $allItems = DB::table('items')

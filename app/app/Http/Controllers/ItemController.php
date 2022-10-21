@@ -12,9 +12,15 @@ class ItemController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $items = Item::getAllItems();  // Itemモデルのメソッド呼び出し
+        if (!empty($request)) {
+            $items = Item::searchItems($request->all())
+                                ->select('id', 'name', 'price', 'is_selling')
+                                ->paginate(20);
+        } else {
+            $items = Item::getAllItems();  // Itemモデルのメソッド呼び出し
+        }
 
         return view('items', [
             'items' => $items,
