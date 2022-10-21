@@ -13,9 +13,15 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $customers = Customer::getAllCustomers();
+        if (!empty($request)) {
+            $customers = Customer::searchCustomers($request->all())
+                                ->select('id', 'name', 'tel', 'address')
+                                ->paginate(20);
+        } else {
+            $customers = Customer::getAllCustomers();
+        }
 
         return view('customers', [
             'customers' => $customers,
