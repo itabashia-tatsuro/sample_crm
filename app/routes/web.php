@@ -22,3 +22,6 @@ Route::get('/customer/{customer}', 'CustomerController@show')->name('customer.de
 
 Route::resource('items', 'ItemController');
 Route::post('/items/search', 'ItemController@index')->name('search.items');
+
+Route::resource('orders', 'OrderController');
+Route::post('/orders/search', 'orderController@index')->name('search.orders');

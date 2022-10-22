@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Item extends Model
 {
-    use SoftDeletes;
+    // use SoftDeletes;
     
-    protected $dates = ['deleted_at'];
+    // protected $dates = ['deleted_at'];
 
     protected $fillable = [ 
         'name', 
@@ -43,6 +43,13 @@ class Item extends Model
             
             return $query;
         }
+    }
+
+    // リレーション
+    public function orders()
+    {
+        // belongsToMany('関係するモデル', '中間テーブルのテーブル名', '中間テーブル内で対応しているID名', '関係するモデルで対応しているID名');
+        return $this->belongsToMany('App\Order', 'item_order', 'item_id', 'order_id');
     }
 
     public static function getAllItems()

@@ -39,6 +39,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('items.index') }}">商品情報一覧</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('orders.index') }}">注文情報一覧</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

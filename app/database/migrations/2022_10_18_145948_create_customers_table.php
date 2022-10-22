@@ -16,7 +16,7 @@ class CreateCustomersTable extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name')->comment('氏名');
-            $table->integer('tel')->comment('電話番号');
+            $table->string('tel')->comment('電話番号');
             $table->string('email')->unique()->comment('メールアドレス');
             $table->integer('postcode')->comment('郵便番号');
             $table->string('address')->comment('住所');

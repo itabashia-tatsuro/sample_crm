@@ -8,12 +8,11 @@ use Faker\Generator as Faker;
 $factory->define(Customer::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
-        'tel' => $faker->phoneNumber,
+        'tel' => str_replace('-', '', $faker->phoneNumber),
         'email' => $faker->unique()->safeEmail,
         'postcode' => $faker->postcode,
-        'address' => $faker->address,
+        'address' => mb_substr($this->faker->address, 9),
         'birthday' => $faker->dateTime,
         'gender' => $faker->numberBetween(0, 2),
-        'memo' => $faker->realText,
     ];
 });

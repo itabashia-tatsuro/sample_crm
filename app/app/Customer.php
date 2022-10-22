@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use App\Order;
 
 class Customer extends Model
 {
@@ -27,6 +28,12 @@ class Customer extends Model
             return $query;
         }
     }
+
+    // リレーション
+    public function order()
+    {
+        return $this->hasMany(Order::class);
+    } 
 
     public static function getAllCustomers()
     {
