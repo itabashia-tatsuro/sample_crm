@@ -25,3 +25,5 @@ Route::post('/items/search', 'ItemController@index')->name('search.items');
 
 Route::resource('orders', 'OrderController');
 Route::post('/orders/search', 'orderController@index')->name('search.orders');
+
+Route::resource('orders', 'AnalysisController')->except('edit', 'destroy');

@@ -45,4 +45,20 @@ class Customer extends Model
         $customer = Customer::find($id);
         return $customer;
     }
+
+    public static function getCustomerCount()
+    {
+        $customerTotalCount = Customer::count();
+        $customerCount = Customer::selectRaw('count(gender) as gender')
+                                    ->groupBy('gender') // 性別ごとにまとめる
+                                    ->get();
+        $data = [
+            'total' => $customerTotalCount,
+            'men'   => $customerCount[0]->gender,
+            'women' => $customerCount[1]->gender,
+            'other' => $customerCount[2]->gender,
+        ];
+
+        return $data;
+    }
 }

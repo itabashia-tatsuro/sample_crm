@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Customer;
+use PHPUnit\TextUI\XmlConfiguration\Group;
+use Carbon\Carbon;
+use Illuminate\Support\Carbon as SupportCarbon;
 
 class HomeController extends Controller
 {
@@ -23,6 +27,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        // 顧客の人数
+        $file = "../public/getCustomerCount.json";
+        $data = file_get_contents($file);
+        $customerCount = json_decode($data, true);
+
+        return view('home', [
+            'perCustomerCount' => $customerCount
+        ]);
     }
 }
