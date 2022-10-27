@@ -19,8 +19,10 @@
     </div>
   @endif
   
-  <form class="row g-3 mb-3" action="{{ route('search.orders') }}" method="post">
-    @csrf
+  <form class="row g-3 mb-3" action="{{ route('search.orders') }}" method="get">
+
+    <input type="hidden" name="search" value="search"> <!-- ページネーション 2ページ目以降の対策 -->
+    
     <div class="col-md-6">
       <label for="id" class="form-label">商品番号</label>
       <input type="number" class="form-control" id="id" name="id" placeholder="商品番号を入力してください">
@@ -70,6 +72,6 @@
     </tbody>
   </table>
   
-  {{ $orders->links() }}
+  {{ $orders->appends(request()->input())->links() }}
 </div>
 @endsection

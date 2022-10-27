@@ -47,28 +47,26 @@ class Order extends Model
     */
     public function scopeSearchBetweenDateOrders($query, $input)
     {
-        if (!empty($input)) {
-            $date1 = $input['date1'];
-            $date2 = $input['date2'];
-            
-            if (!empty($data1) && !empty($date2)) {
+        if(!empty($input['date1'])) $date1 = $input['date1'];
+        if(!empty($input['date2'])) $date1 = $input['date2'];
+
+        if (!empty($data1) && !empty($date2)) {
+            $date1 = (new Carbon($date1))->format('Y-m-d 23:59:59');
+            $date2 = (new Carbon($date2))->format('Y-m-d 23:59:59');
+            $query->whereBetween('created_at', [$date1, $date2]);
+        } else {
+            if(!empty($date1)) {
                 $date1 = (new Carbon($date1))->format('Y-m-d 23:59:59');
-                $date2 = (new Carbon($date2))->format('Y-m-d 23:59:59');
-                $query->whereBetween('created_at', [$date1, $date2]);
-            } else {
-                if(!empty($date1)) {
-                    $date1 = (new Carbon($date1))->format('Y-m-d 23:59:59');
-                    $query->where('created_at', '>=', $date1);
-                }
-                
-                if(!empty($date2)) {
-                    $date2 = (new Carbon($date2))->format('Y-m-d 23:59:59');
-                    $query->where('created_at', '<=', $date2);
-                }
+                $query->where('created_at', '>=', $date1);
             }
             
-            return $query;
+            if(!empty($date2)) {
+                $date2 = (new Carbon($date2))->format('Y-m-d 23:59:59');
+                $query->where('created_at', '<=', $date2);
+            }
         }
+        
+        return $query;
     }
 
     // リレーション

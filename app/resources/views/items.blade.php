@@ -19,8 +19,8 @@
     </div>
   @endif
   
-  <form class="row g-3 mb-3" action="{{ route('search.items') }}" method="post">
-    @csrf
+  <form class="row g-3 mb-3" action="{{ route('search.items') }}" method="get">
+    
     <div class="col-md-6">
       <label for="name" class="form-label">商品名</label>
       <input type="text" class="form-control" id="name" name="name" placeholder="商品名を入力してください">
@@ -67,6 +67,6 @@
     </tbody>
   </table>
   
-  {{ $items->links() }}
+  {{ $items->appends(request()->input())->links() }}
 </div>
 @endsection

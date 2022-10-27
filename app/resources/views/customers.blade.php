@@ -8,8 +8,8 @@
     </div>
   @endif
   
-  <form class="row g-3" action="{{ route('search.customers') }}" method="post">
-    @csrf
+  <form class="row g-3" action="{{ route('search.customers') }}" method="get">
+
     <div class="col-md-6">
       <label for="name" class="form-label">氏名</label>
       <input type="text" class="form-control" id="name" name="name" placeholder="顧客氏名を入力してください">
@@ -50,6 +50,6 @@
     </tbody>
   </table>
   
-  {{ $customers->links() }}
+  {{ $customers->appends(request()->input())->links() }}
 </div>
 @endsection

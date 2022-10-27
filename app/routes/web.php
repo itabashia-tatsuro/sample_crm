@@ -17,13 +17,13 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/customers', 'CustomerController@index')->name('customers');
-Route::post('/customers/search', 'CustomerController@index')->name('search.customers');
+Route::get('/customers/search', 'CustomerController@index')->name('search.customers');
 Route::get('/customer/{customer}', 'CustomerController@show')->name('customer.detail');
 
+Route::get('/items/search', 'ItemController@index')->name('search.items');
 Route::resource('items', 'ItemController');
-Route::post('/items/search', 'ItemController@index')->name('search.items');
 
+Route::get('/orders/search', 'orderController@index')->name('search.orders');
 Route::resource('orders', 'OrderController');
-Route::post('/orders/search', 'orderController@index')->name('search.orders');
 
-Route::resource('orders', 'AnalysisController')->except('edit', 'destroy');
+Route::resource('analysis', 'AnalysisController')->except('edit', 'destroy');

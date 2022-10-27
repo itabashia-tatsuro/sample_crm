@@ -18,7 +18,7 @@ class Customer extends Model
     {
         // $input = 検索フォームに入力された値
         if (!empty($input)) {
-            unset($input['_token']);
+            unset($input['page']);
             foreach ($input as $key => $value) {
                 if(empty($value)) {
                     continue;

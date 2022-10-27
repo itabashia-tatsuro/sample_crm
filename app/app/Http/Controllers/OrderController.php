@@ -15,7 +15,7 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->method('post')) {
+        if ($request->method('get')) {
             $orders = Order::searchOrders($request->only(['id', 'customer_id']))
                             ->searchBetWeenDateOrders($request->only(['date1', 'date2']))
                             ->select('id', 'customer_id', 'quantity', 'price', 'status', 'created_at')

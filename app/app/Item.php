@@ -29,7 +29,7 @@ class Item extends Model
     {
         // $input = 検索フォームに入力された値
         if (!empty($input)) {
-            unset($input['_token']);
+            unset($input['page']);
 
             // 商品名
             if (!empty($input['name'])){
