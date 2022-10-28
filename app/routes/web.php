@@ -15,6 +15,8 @@ use App\Http\Controllers\CustomerController;
 
 Auth::routes();
 
+Route::get('/output', 'ItemController@export')->name('excel.download');
+
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/customers', 'CustomerController@index')->name('customers');
 Route::get('/customers/search', 'CustomerController@index')->name('search.customers');

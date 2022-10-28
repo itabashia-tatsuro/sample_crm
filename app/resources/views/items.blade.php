@@ -13,6 +13,10 @@
     <a class="btn btn-primary" href="{{route('items.create')}}" role="button">商品登録</a>
   </div>
 
+  <div class="d-grid gap-2 d-md-block mb-3">
+    <a class="btn btn-primary" href="{{route('excel.download')}}" role="button">商品ダウンロード</a>
+  </div>
+
   @if(empty($items[0]))
     <div class="alert alert-success mt-3">
       検索にヒットしませんでした。もう一度検索してください
