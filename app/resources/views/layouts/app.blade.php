@@ -11,6 +11,8 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="{{ asset('js/ajax.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -41,6 +43,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('orders.index') }}">注文情報一覧</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('analysis.index') }}">注文情報分析</a>
                         </li>
                     </ul>
 
@@ -84,5 +89,7 @@
             @yield('content')
         </main>
     </div>
+
+    @yield('js')
 </body>
 </html>

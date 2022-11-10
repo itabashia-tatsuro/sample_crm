@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Order;
 use App\Customer;
 
@@ -15,11 +16,21 @@ class OrderController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->method('get')) {
+        if ($request->hasAny(['id', 'name', 'date1', 'date2'])) {
             $orders = Order::searchOrders($request->only(['id', 'customer_id']))
                             ->searchBetWeenDateOrders($request->only(['date1', 'date2']))
-                            ->select('id', 'customer_id', 'quantity', 'price', 'status', 'created_at')
-                            ->orderBy('created_at', 'desc')
+                            ->join('item_order as io', 'orders.id', '=', 'io.order_id')
+                            ->join('items', 'items.id', '=', 'io.item_id')
+                            ->select(
+                                'orders.id',
+                                'orders.customer_id',
+                                'orders.quantity',
+                                DB::raw('SUM(items.price) as total'),
+                                'orders.status',
+                                'orders.created_at'
+                            )
+                            ->groupBy('io.order_id')
+                            ->orderBy('orders.created_at', 'desc')
                             ->paginate(20);
         } else {
             $orders = Order::getAllOrders();

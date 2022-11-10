@@ -28,4 +28,5 @@ Route::resource('items', 'ItemController');
 Route::get('/orders/search', 'orderController@index')->name('search.orders');
 Route::resource('orders', 'OrderController');
 
-Route::resource('analysis', 'AnalysisController')->except('edit', 'destroy');
+Route::get('analysis', 'AnalysisController@index')->name('analysis.index');
+Route::get('analysis/ajax', 'AnalysisController@analysis');

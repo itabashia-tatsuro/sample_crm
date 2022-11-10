@@ -63,7 +63,7 @@
         <td class="mx-5 text-center">{{ $order->id }}</td>
         <td class="mx-5 text-center"><a href="{{route('customer.detail', ['customer'=> $order->customer_id ])}}">{{ $order->customer_id }}</a></td>
         <td class="mx-5 text-center">{{ $order->quantity }}</td>
-        <td class="mx-5 text-center">{{ $order->price }}</td>
+        <td class="mx-5 text-center">{{ $order->total }}</td>
         <td class="mx-5 text-center">{{ $order->status }}</td>
         <td class="mx-5 text-center">{{ $order->created_at }}</td>
         <td class="mx-5 text-center"><a href="{{route('orders.show', ['order'=> $order->id ])}}">#</a></td>

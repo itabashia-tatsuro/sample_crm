@@ -13,8 +13,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(CustomersTableSeeder::class);
-        // $this->call(ItemsTableSeeder::class);
+        $this->call(CustomersTableSeeder::class);
+        $this->call(ItemsTableSeeder::class);
         // $this->call(OrdersTableSeeder::class);
 
         // 中間テーブル用
@@ -22,11 +22,10 @@ class DatabaseSeeder extends Seeder
         
         factory(Order::class, 1000)->create()
                             ->each(function(Order $order) use ($items) {
-                                $order
-                                ->items()
-                                ->attach(
-                                    $items->random(rand(1,1))->pluck('id')->toArray()
-                                );
+                                $order->items()
+                                        ->attach(
+                                            $items->random(rand(1,3))->pluck('id')->toArray()
+                                        );
                             });
     }
 }
